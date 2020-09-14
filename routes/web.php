@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function()
     {
         Route::get('/uzytkownik/{user}/edit', 'UserController@editProfile')->name('user.show.detail.profile');
         Route::get('/logout', 'Auth\LoginController@logout');
+        Route::put('/uzytkownik/{user}/update', 'UserController@update')->name('update.profile');
     });
 
 

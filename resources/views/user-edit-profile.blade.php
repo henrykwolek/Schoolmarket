@@ -33,7 +33,7 @@
           <div class="col-md-8">
             <p class="lead" style="font-size: 150%">Podstawowe informacje</p>
             <hr>
-            <form method="post" action="#" enctype="multipart/form-data">
+            <form method="post" action="{{route('update.profile', $user)}}" enctype="multipart/form-data">
                       @csrf
                       @method('PUT')
                       <div class="form-group">
