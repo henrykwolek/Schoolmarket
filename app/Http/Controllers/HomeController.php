@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\ShopItem;
 
 class HomeController extends Controller
 {
@@ -22,8 +23,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(User $user)
+    public function index(ShopItem $shopItem, User $user)
     {
-        return view('home');
+        $shopItems = shopItem::orderBy('id', 'DESC')->paginate(15);
+        return view('home', [
+            'shopItems' => $shopItems,
+        ]);
     }
 }

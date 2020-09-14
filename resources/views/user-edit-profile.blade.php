@@ -63,14 +63,39 @@
                               <input type="file" name="avatar" class="custom-file-input" id="avatar" aria-describedby="inputGroupFileAddon01">
                               <label class="custom-file-label" for="avatar">Wybierz plik</label>
                           </div>
-                          @error('avatar')
-                            <p class="text-danger">{{ $message }}</p>
-                          @enderror
                       </div>
+                      @error('avatar')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
+                      <p class="text-primary" id="avatar-filename"></p>
+                      <script>
+                        var input = document.getElementById( 'avatar' );
+                        var infoArea = document.getElementById( 'avatar-filename' );
+                        input.addEventListener( 'change', showFileName );
+
+                        function showFileName( event ) {
+  
+                          // the change event gives us the input it occurred in 
+                          var input = event.srcElement;
+  
+                          // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+                          var fileName = input.files[0].name;
+  
+                          // use fileName however fits your app best, i.e. add it into a div
+                          infoArea.textContent = 'Wybrany plik: ' + fileName + ' zostanie przycięty do rozdzielczości 300x300 px.';
+                        }
+                      </script>
                       <div class="form-group">
-                          <label for="about">Biogram</label>
+                          <label for="about">Biogram (opcjonalny)</label>
                           <textarea class="form-control" name="about" id="about" cols="30" placeholder="Opowiedz o sobie" rows="4">{{$user->about}}</textarea>
                       </div>
+                      <div class="form-group">
+                        <label for="url">Adres internetowy (opcjonalny)</label>
+                        <input type="url" placeholder="Podaj swój adres URL" class="form-control" value="{{$user->url}}" name="url" id="url">
+                      </div>
+                      @error('url')
+                        <p class="text-danger">{{ $message }}</p>
+                      @enderror
                       <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
                   </form>
                   <br>

@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\Facades\Image;
 use Illuminate\Http\Request;
 use App\User;
+use App\ShopItem;
 use Auth;
 
 class UserController extends Controller
 {
-    public function showProfile(User $user)
+    public function showProfile(User $user, ShopItem $shopItems)
     {
+        $shopItems = shopItem::orderBy('id', 'DESC')->where('user_id', $user->id)->paginate(9);
         return view('user-profile', [
-            'user' => $user
+            'user' => $user,
+            'shopItems' => $shopItems
         ]);
     }
 
@@ -40,14 +44,17 @@ class UserController extends Controller
         $inputs = request()->validate([
             'username' => ['required', 'string', 'max:255', 'unique:users,username,'.$user->id],
             'name' => ['required', 'string', 'max:255'],
-            'avatar' => ['file'],
+            'avatar' => ['image:jpeg,jpg,png,webp,jfif'],
+            'url' => ['url'],
             'about' => [''],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$user->id]
         ]);
 
         if(request('avatar'))
         {
-            $inputs['avatar'] = request('avatar')->store('images');
+            $inputs['avatar'] = request('avatar')->store('avatars');
+            $image = Image::make(public_path($inputs['avatar']))->fit(300, 300);
+            $image->save();
         }
 
         $user->update($inputs);

@@ -15,6 +15,13 @@ class CreateShopItemsTable extends Migration
     {
         Schema::create('shop_items', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->string('category');
+            $table->text('post_image')->nullable();
+            $table->string('status')->default('active');
+            $table->string('post_price');
+            $table->text('body');
             $table->timestamps();
         });
     }
