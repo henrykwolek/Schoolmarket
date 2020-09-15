@@ -180,7 +180,9 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @endforeach            
+        </div>
+        <div class="row">
             <div class="mx-auto">{{ $shopItems->links() }}</div>
         </div>
         <!-- /.row -->

@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function showProfile(User $user, ShopItem $shopItems)
     {
-        $shopItems = shopItem::orderBy('id', 'DESC')->where('user_id', $user->id)->paginate(9);
+        $shopItems = shopItem::orderBy('id', 'DESC')->where('user_id', $user->id)->paginate(8);
         return view('user-profile', [
             'user' => $user,
             'shopItems' => $shopItems

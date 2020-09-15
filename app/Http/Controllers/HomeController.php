@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index(ShopItem $shopItem, User $user)
     {
-        $shopItems = shopItem::orderBy('id', 'DESC')->paginate(15);
+        $shopItems = shopItem::orderBy('id', 'DESC')->paginate(9);
         return view('home', [
             'shopItems' => $shopItems,
         ]);
