@@ -60,46 +60,36 @@
                 </div>
                 <!-- /.card -->
 
-                <div class="card card-outline-secondary my-4 shadow">
+                <div class="card card-outline-secondary my-4 shadow p-2">
                     <div class="card-header">
-                        Product Reviews
+                        Komentarze
                     </div>
-                    <div class="card-body">
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Omnis et enim aperiam inventore, similique
-                            necessitatibus neque non! Doloribus, modi sapiente
-                            laboriosam aperiam fugiat laborum. Sequi mollitia,
-                            necessitatibus quae sint natus.
-                        </p>
-                        <small class="text-muted"
-                            >Posted by Anonymous on 3/1/17</small
-                        >
-                        <hr />
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Omnis et enim aperiam inventore, similique
-                            necessitatibus neque non! Doloribus, modi sapiente
-                            laboriosam aperiam fugiat laborum. Sequi mollitia,
-                            necessitatibus quae sint natus.
-                        </p>
-                        <small class="text-muted"
-                            >Posted by Anonymous on 3/1/17</small
-                        >
-                        <hr />
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Omnis et enim aperiam inventore, similique
-                            necessitatibus neque non! Doloribus, modi sapiente
-                            laboriosam aperiam fugiat laborum. Sequi mollitia,
-                            necessitatibus quae sint natus.
-                        </p>
-                        <small class="text-muted"
-                            >Posted by Anonymous on 3/1/17</small
-                        >
-                        <hr />
-                        <a href="#" class="btn btn-success">Leave a Review</a>
-                    </div>
+                    <div id="disqus_thread"></div>
+                    <script>
+                        /**
+                         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                        /*
+                        var disqus_config = function () {
+                        this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                        };
+                        */
+                        (function() {
+                            // DON'T EDIT BELOW THIS LINE
+                            var d = document,
+                                s = d.createElement("script");
+                            s.src = "https://schoolmarket.disqus.com/embed.js";
+                            s.setAttribute("data-timestamp", +new Date());
+                            (d.head || d.body).appendChild(s);
+                        })();
+                    </script>
+                    <noscript
+                        >Please enable JavaScript to view the
+                        <a href="https://disqus.com/?ref_noscript"
+                            >comments powered by Disqus.</a
+                        ></noscript
+                    >
                 </div>
                 <!-- /.card -->
             </div>
