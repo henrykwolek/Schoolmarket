@@ -11,19 +11,15 @@
              @endif
           </div>
           <div class="col-md-8">
-            <h5 class="my-4"><strong>Imię i nazwisko: </strong>{{$user->name}}</h5>
-            <h5 class="my-4"><strong>Nazwa użytkownika: </strong>{{$user->username}}</h5>
-            @if(Auth::check())
-              @if (Auth::user()->id == $user->id)
-                <h5 class="my-4"><strong>Adres email: </strong>{{$user->email}}</h5>
-              @endif
-            @endif
+            <h1 class="display-4 mb-3">{{$user->name}}</h1>
+            <h3 class="display-5"></h3>
+            <h4 class="my-4">{{$user->username}} | Liczba ofert: {{count($shopItems)}}</h4>
             <blockquote class="blockquote text-justify">
               <p class="mb-1">{{$user->about}}</p>
               <footer class="blockquote-footer">{{$user->name}}, <cite title="Source Title">Mój biogram</cite></footer>
             </blockquote>
             @if ($user->url !== NULL)
-              <p class="mb-1"><a href="{{$user->url}}">{{$user->url}}</a></p>
+              <p class="mb-1"><a target="blank" href="{{$user->url}}">{{$user->url}}</a></p>
             @endif
 
             @if (Auth::check())
@@ -65,7 +61,11 @@
               <a href="{{route('shop-item-show', $shopItem)}}"><img class="card-img-top" src="{{asset($shopItem->post_image)}}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
-                  <a href="{{route('shop-item-show', $shopItem)}}">{{$shopItem->title}}</a>
+                  @if ($shopItem->user->id == Auth::user()->id)
+                    <a href="{{route('item.edit', $shopItem)}}">{{$shopItem->title}}</a>
+                  @else
+                    <a href="{{route('shop-item-show', $shopItem)}}">{{$shopItem->title}}</a>
+                  @endif
                 </h4>
                 <h5>PLN {{$shopItem->post_price}}</h5>
                 <p class="card-text">{{Str::limit($shopItem->body, '50', '...')}}</p>

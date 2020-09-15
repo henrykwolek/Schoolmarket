@@ -33,19 +33,13 @@ class UserController extends Controller
         }
     }
 
-    public function destroy(User $user)
-    {
-        $user->delete();
-        return back()->with('danger', 'Usunięto profil użytkownika');
-    }
-
     public function update(User $user)
     {
         $inputs = request()->validate([
             'username' => ['required', 'string', 'max:255', 'unique:users,username,'.$user->id],
             'name' => ['required', 'string', 'max:255'],
             'avatar' => ['image:jpeg,jpg,png,webp,jfif'],
-            'url' => ['url'],
+            'url' => ['url', 'nullable'],
             'about' => [''],
             'email' => ['required', 'email', 'max:255', 'unique:users,email,'.$user->id]
         ]);
@@ -59,7 +53,7 @@ class UserController extends Controller
 
         $user->update($inputs);
         
-        return back()->with('success', 'Zmiany w profilu zostały zapisane');
+        return back()->with('success', 'Zmiany w profilu zostały zapisane.');
      }
 
      public function changePassword(User $user)
@@ -69,6 +63,12 @@ class UserController extends Controller
          ]);
 
          $user->update($inputs);
-         return back()->with('success', 'Twoje hasło zostało zmienione');
+         return back()->with('success', 'Twoje hasło zostało zmienione.');
+     }
+
+     public function destroy(User $user)
+     {
+        $user->delete();
+        return redirect()->route('home')->with('danger', 'Twój profil został usunięty.');
      }
 }

@@ -13,11 +13,14 @@
         </div>
 
         @if (Auth::check())
-        <div class="row mx-auto">
-          <img class="rounded-circle mx-auto d-block shadow-lg" height="200px" height="200px" src="{{asset(Auth::user()->avatar)}}">
+        <div class="row w-100">
+          @if (Auth::user()->avatar == NULL)
+                <img height="200" width="200" src="https://d1nhio0ox7pgb.cloudfront.net/_img/o_collection_png/green_dark_grey/512x512/plain/user.png" class="rounded-circle mx-auto d-block" alt="">
+              @else
+                <img src="{{asset(Auth::user()->avatar)}}" class="rounded-circle mx-auto d-block shadow-lg align-middle" alt="">
+             @endif
           <br>
           <div class="w-100"><p class="lead text-center mb-0" style="font-size: 175%"><a href="{{route('user-show-profile', Auth::user()->id)}}">{{Auth::user()->name}}</a></p></div>
-          <div class="w-100"><p class="text-center">{{Auth::user()->username}}</p></div>
         </div>
         @endif
 
@@ -52,14 +55,23 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-
-        <div class="row">
-          @if($message = Session::get('warning'))
+        @if($message = Session::get('warning'))
           <br>
           <div class="alert alert-warning alert-block"> 
             <strong>{{ $message }}</strong>
           </div>
         @endif
+        @if($message = Session::get('danger'))
+        <br>
+        <div class="alert alert-danger alert-block">
+        
+            <button type="button" class="close" data-dismiss="alert">×</button>    
+        
+            <strong>{{ $message }}</strong>
+        
+        </div>
+  @endif
+        <div class="row">
           @foreach ($shopItems as $shopItem)
           <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100 shadow lg hover">

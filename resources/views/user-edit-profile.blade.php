@@ -103,18 +103,18 @@
                   <hr>
   
   
-                  <form method="post" action="#" enctype="multipart/form-data">
+                  <form method="post" action="{{route('user-change-password', $user)}}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                      <label for="password">Hasło • Wymagane dla potwierdzenia</label>
+                      <label for="password">Nowe hasło • Minimalnie 8 znaków</label>
                       <input type="password" placeholder="Nowe hasło" class="form-control" value="" name="password" id="password">
                   </div>
                   @error('password')
                     <p class="text-danger">{{ $message }}</p>
                   @enderror
                   <div class="form-group">
-                      <label for="password-confirm">Powtórz hasło • Wymagane dla potwierdzenia</label>
+                      <label for="password-confirm">Powtórz nowe hasło</label>
                       <input type="password" placeholder="Powtórz hasło" class="form-control" value="" name="password_confirmation" id="password_confirmation">
                   </div>
                   @error('password_confirmation')
@@ -125,12 +125,38 @@
                   <br>
                   <p class="lead" style="font-size: 150%">Usuwanie konta</p>
                   <hr>
-                  <form method="post" action="#" enctype="multipart/form-data">
-                    @csrf
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger">Usuń swoje konto</button> 
-                    <p class="text-danger">Uwaga! ta czynność jest nieodwracalna.</p>
-                  </form>
+
+                  <!-- Button trigger modal -->
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                    Usuń swoje konto
+                  </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Czy na pewno chcesz to zrobić?</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          Wraz z twoim kontem zostaną usunięte wszystkie oferty i ogłoszenia
+                          <p class="text-danger mb-0"><u>Tej czynności nie można cofnąć.</u></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                          <br>
+                          <form method="post" action="{{route('user-destroy-profile', $user)}}" enctype="multipart/form-data">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Usuń swoje konto</button> 
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
           </div>
         </div>
         <hr>

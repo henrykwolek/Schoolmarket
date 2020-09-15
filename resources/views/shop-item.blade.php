@@ -17,7 +17,7 @@
     
           <div class="col-lg-9">
     
-            <div class="card mt-4">
+            <div class="card mt-4 shadow">
               <img class="card-img-top img-fluid" src="{{asset($shopItem->post_image)}}" alt="">
               <span class="border-bottom"></span>
               <div class="card-body">
@@ -29,7 +29,7 @@
             </div>
             <!-- /.card -->
     
-            <div class="card card-outline-secondary my-4">
+            <div class="card card-outline-secondary my-4 shadow">
               <div class="card-header">
                 Product Reviews
               </div>
