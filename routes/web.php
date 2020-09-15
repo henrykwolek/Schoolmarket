@@ -27,8 +27,8 @@ Route::middleware('auth')->group(function()
         //metody GET
         Route::get('/uzytkownik/{user}/edit', 'UserController@editProfile')->name('user.show.detail.profile');
         Route::get('/logout', 'Auth\LoginController@logout');
-        Route::get('/shopitem/create', 'ShopController@createView')->name('shop-item-create');
-        Route::get('/shopitem/{shopItem}/edit', 'ShopController@editItem')->name('item.edit');
+        Route::get('/shopitems/create', 'ShopController@createView')->name('shop-item-create');
+        Route::get('/shopitems/{shopItem}/edit', 'ShopController@editItem')->name('item.edit');
         //metody POST
         Route::post('/shoptitems/create/store', 'ShopController@storeItems')->name('shop-store-items');
         //metody PUT

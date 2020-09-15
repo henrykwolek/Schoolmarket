@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
-use Auth;
+use Illuminate\Http\Request;
 use App\User;
 use App\ShopItem;
+use Auth;
 
 class ShopController extends Controller
 {
@@ -82,6 +82,7 @@ class ShopController extends Controller
             $inputs['post_image'] = request('post_image')->store('images');
             $image = Image::make(public_path($inputs['post_image']))->fit(1400, 800);
             $image->save();
+            $shopItem->post_image = $inputs['post_image'];
         }
 
         $shopItem->title = $inputs['title'];
@@ -91,6 +92,13 @@ class ShopController extends Controller
 
         auth()->user()->shopItems()->save($shopItem);
 
-        return back()->with('info', 'Zmiany zostały zapisane');
+        return back()->with('success', 'Zmiany zostały zapisane.');
      }
+
+     public function destroy(ShopItem $shopItem)
+    {
+        $shopItem->delete();
+        return redirect()->route('user-show-profile', Auth::user())->with('danger', 'Usunięto ogłoszenie.');
+    }
+
 }
